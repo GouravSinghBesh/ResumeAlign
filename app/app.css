@@ -1,15 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap");
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+  --font-sans: "Mona Sans", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --color-dark-200: #475467;
+  --color-light-blue-100: #c1d3f81a;
+  --color-light-blue-200: #a7bff14d;
+
+  --color-badge-green: #d5faf1;
+  --color-badge-red: #f9e3e2;
+  --color-badge-yellow: #fceed8;
+
+  --color-badge-green-text: #254d4a;
+  --color-badge-red-text: #752522;
+  --color-badge-yellow-text: #73321b;
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  @apply bg-white;
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+main {
+  @apply min-h-screen pt-10;
+}
+
+h1 {
+  @apply text-6xl text-gradient leading-tight tracking-[-2px] font-semibold;
+}
+
+h2 {
+  @apply text-3xl text-dark-200;
+}
+
+.main-section {
+  @apply flex flex-col items-center gap-8 pt-12 mx-15 pb-5;
+}
+
+.page-heading {
+  @apply flex flex-col items-center gap-8 max-w-4xl text-center;
+}
+
+.navbar {
+    @apply flex flex-row justify-between items-center bg-white rounded-full p-4 w-full px-10 max-w-300 mx-auto;
   }
+
+@layer components {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-linear-to-r from-[#AB8C95] via-[#000000] to-[#8E97C5];
+  }
+  .primary-button {
+    @apply primary-gradient text-white rounded-full px-4 py-2 cursor-pointer w-full;
+  }
+}
+
+
+@utility text-gradient {
+  @apply bg-clip-text text-transparent bg-linear-to-r from-[#AB8C95] via-[#000000] to-[#8E97C5];
+}
+@utility primary-gradient {
+  background: linear-gradient(to bottom, #8e98ff, #606beb);
+  box-shadow: 0px 74px 21px 0px #6678ef00;
 }
