@@ -44,13 +44,26 @@ h2 {
 }
 
 .navbar {
-    @apply flex flex-row justify-between items-center bg-white rounded-full p-4 w-full px-10 max-w-300 mx-auto;
+  @apply flex flex-row justify-between items-center bg-white rounded-full p-4 w-full px-10 max-w-300 mx-auto;
+}
+
+.resumes-section {
+    @apply flex flex-wrap max-lg:flex-col gap-6 items-start  w-full max-w-[1850px] justify-evenly;
   }
+
+.resume-card {
+  @apply flex flex-col gap-8 h-140 w-full lg:w-112.5 xl:w-122.5 bg-white rounded-2xl p-4;
+}
+
+.resume-card-header {
+  @apply flex flex-row gap-2 justify-between min-h-27.5 max-sm:flex-col items-center max-md:justify-center max-md:items-center;
+}
 
 @layer components {
   .text-gradient {
     @apply bg-clip-text text-transparent bg-linear-to-r from-[#AB8C95] via-[#000000] to-[#8E97C5];
   }
+
   .primary-button {
     @apply primary-gradient text-white rounded-full px-4 py-2 cursor-pointer w-full;
   }
@@ -60,6 +73,7 @@ h2 {
 @utility text-gradient {
   @apply bg-clip-text text-transparent bg-linear-to-r from-[#AB8C95] via-[#000000] to-[#8E97C5];
 }
+
 @utility primary-gradient {
   background: linear-gradient(to bottom, #8e98ff, #606beb);
   box-shadow: 0px 74px 21px 0px #6678ef00;
