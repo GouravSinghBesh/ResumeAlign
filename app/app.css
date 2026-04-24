@@ -85,6 +85,14 @@ form {
     @apply flex flex-col gap-2 w-full items-start;
   }
 
+  .gradient-border {
+    @apply bg-linear-to-b from-light-blue-100 to-light-blue-200 p-4 rounded-2xl;
+  }
+
+   .uploader-selected-file {
+    @apply flex items-center justify-between p-3 bg-gray-50 rounded-2xl;
+  }
+
 @layer components {
   .text-gradient {
     @apply bg-clip-text text-transparent bg-linear-to-r from-[#AB8C95] via-[#000000] to-[#8E97C5];
