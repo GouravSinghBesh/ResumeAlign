@@ -5,13 +5,14 @@ import { convertPdfToImage } from '~/lib/pdf2img';
 import { usePuterStore } from '~/lib/puter';
 import { generateUUID } from '~/lib/utils';
 import { prepareInstructions } from '../../constants';
+import { useNavigate } from 'react-router';
 
 const upload = () => {
     const { auth, fs, isLoading, kv, ai } = usePuterStore()
     const [isProcessing, setIsProcessing] = useState(false);
     const [statusText, setStatusText] = useState('');
     const [file, setFile] = useState<File | null>(null);
-
+    const navigate = useNavigate();
     const handleFileSelect = (selectedFile: File | null) => {
         setFile(selectedFile);
     }
@@ -25,9 +26,9 @@ const upload = () => {
 
         setStatusText('Converting to image...');
         const imageFile = await convertPdfToImage(file);
-        console.log("image",imageFile);
-        
-        if (!imageFile.file){
+        console.log("image", imageFile);
+
+        if (!imageFile.file) {
             //show toast before setting status text
             // setIsProcessing(false);
             return setStatusText('Failed to convert PDF to image. Please try again.');
@@ -63,8 +64,8 @@ const upload = () => {
         data.feedback = JSON.parse(feedbackText);
         await kv.set(`resume:${uuid}`, JSON.stringify(data));
         setStatusText('Analysis complete, redirecting...');
+        navigate(`/resume/${uuid}`)
         console.log('Feedback:', data);
-
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
