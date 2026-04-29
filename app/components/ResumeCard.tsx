@@ -1,8 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import ScoreCircle from './ScoreCircle'
+import { usePuterStore } from '~/lib/puter';
+
 
 const ResumeCard = ({ resume: { id, companyName, jobTitle, feedback, imagePath } }: { resume: Resume }) => {
+    const [resumeUrl, setResumeUrl] = useState<string>('');
+    const { fs } = usePuterStore();
+
+    useEffect(() => {
+        const loadResume = async () => {
+            const imageBlob = await fs.read(imagePath);
+            if (!imageBlob) return;
+
+            const imageUrl = URL.createObjectURL(imageBlob);
+            setResumeUrl(imageUrl);
+        }
+        loadResume();
+
+    }, [imagePath])
+
     return (
         <Link to={`/resumes/${id}`} className='resume-card animate-in fade-in duration-1000'>
             <div className='resume-card-header'>
@@ -15,15 +32,18 @@ const ResumeCard = ({ resume: { id, companyName, jobTitle, feedback, imagePath }
                     <ScoreCircle score={feedback.overallScore} />
                 </div>
             </div>
-            <div className="gradient-border animate-in fade-in duration-1000">
-                <div className="w-full h-full">
-                    <img
-                        src={imagePath}
-                        alt="resume"
-                        className="w-full h-[350px] max-sm:h-50 object-cover object-top"
-                    />
+            {resumeUrl && (
+                <div className="gradient-border animate-in fade-in duration-1000">
+                    <div className="w-full h-full">
+                        <img
+                            src={resumeUrl}
+                            alt="resume"
+                            className="w-full h-[350px] max-sm:h-50 object-cover object-top"
+                        />
+                    </div>
                 </div>
-            </div>
+            )}
+
         </Link>
     )
 }
